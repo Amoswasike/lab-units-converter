@@ -1,0 +1,47 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+
+# =========================
+# Build outputs (future-proof)
+# =========================
+dist/
+build/
+
+# =========================
+# Logs
+# =========================
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.local
+.env.*.local
+
+# =========================
+# Editor folders
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# Testing / coverage
+# =========================
+coverage/
+
+# =========================
+# NOTE
+# =========================
+# Service worker cache files are runtime-only and should NOT be ignored here
+# (they are not stored in your repo anyway)
