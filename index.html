@@ -8,81 +8,122 @@
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#16a34a" />
 
-    <!-- iOS PWA Support -->
+    <!-- SEO -->
+    <meta name="description" content="Offline PWA for lab unit conversion and clinical interpretation" />
+
+    <meta property="og:title" content="Lab Unit Converter" />
+    <meta property="og:description" content="Clinical-grade lab conversion tool with offline support" />
+    <meta property="og:image" content="./screenshots/desktop.png" />
+
+    <!-- PWA iOS support -->
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Lab Converter" />
     <link rel="apple-touch-icon" href="./icons/icon-192.png" />
 
     <link href="./src/output.css" rel="stylesheet" />
-
-    <meta name="description" content="Lab Unit Converter - Offline PWA for medical lab test conversions and interpretation" />
-
-    <meta property="og:title" content="Lab Unit Converter" />
-<meta property="og:description" content="Offline medical lab converter with interpretation and PWA support" />
-<meta property="og:image" content="./screenshots/desktop.png" />
   </head>
 
-  <body class="bg-green-100 flex items-center justify-center min-h-screen">
+  <!-- MOBILE-FIRST FOUNDATION -->
+  <body class="bg-gray-50 min-h-screen">
 
     <!-- Install Button -->
     <button
       id="installBtn"
       aria-label="Install Lab Unit Converter app"
-      class="fixed top-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg hover:bg-green-700 transition-all duration-300 ease-in-out opacity-0 pointer-events-none focus:outline-none focus:ring-2 focus:ring-green-300 focus:ring-offset-2"
+      class="fixed top-3 right-3 z-50 bg-green-600 text-white px-3 py-2 rounded-full shadow-lg text-xs opacity-0 pointer-events-none"
     >
-      <span class="text-sm font-semibold block">Install App</span>
-      <span class="text-xs opacity-80 block">Faster • Offline • No UI</span>
+      Install
     </button>
 
-    <!-- App Card -->
-    <div class="bg-white p-8 rounded-2xl shadow-lg w-96">
-      <h1 class="text-xl font-bold mb-4 text-center">Lab Unit Converter</h1>
+    <!-- FULL SCREEN APP SHELL -->
+    <div class="max-w-md mx-auto min-h-screen bg-white">
 
-      <!-- Test -->
-      <label class="block mb-2 font-medium">Test</label>
-      <select id="test" class="w-full p-2 border rounded mb-4">
-        <option value="phosphate">Phosphate</option>
-        <option value="magnesium">Magnesium</option>
-        <option value="uric_acid">Uric Acid</option>
-        <option value="chol_hdl_ratio">Chol/HDL Ratio</option>
-      </select>
+      <!-- HEADER (clinical style) -->
+      <header class="sticky top-0 bg-white border-b px-4 py-3">
+        <h1 class="text-lg font-semibold text-gray-800">
+          Lab Unit Converter
+        </h1>
+        <p class="text-xs text-gray-500">
+          Clinical Reference Tool • Offline Ready
+        </p>
+      </header>
 
-      <!-- Value -->
-      <label class="block mb-2 font-medium">Value</label>
+      <!-- FORM CONTAINER -->
+      <main class="p-4 space-y-4">
 
-      <div class="flex gap-2 mb-4">
-        <input
-          type="number"
-          id="value"
-          class="w-full p-2 border rounded"
-          placeholder="Enter Value"
-        />
+        <!-- TEST -->
+        <div>
+          <label class="text-sm font-medium text-gray-700">Test</label>
+          <select
+            id="test"
+            class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+          >
+            <option value="phosphate">Phosphate</option>
+            <option value="magnesium">Magnesium</option>
+            <option value="uric_acid">Uric Acid</option>
+            <option value="chol_hdl_ratio">Chol/HDL Ratio</option>
+          </select>
+        </div>
 
-        <button
-          id="clearValue"
-          class="px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-          type="button"
-        >
-          Clear
-        </button>
-      </div>
+        <!-- VALUE -->
+        <div>
+          <label class="text-sm font-medium text-gray-700">Value</label>
 
-      <!-- Cholesterol Inputs -->
-      <div id="cholesterolInputs" class="hidden mb-4">
-        <label class="block mb-2 font-medium">Total Cholesterol</label>
-        <input type="number" id="totalChol" class="w-full p-2 border rounded mb-2" />
+          <div class="flex gap-2 mt-1">
+            <input
+              type="number"
+              id="value"
+              placeholder="Enter value"
+              class="flex-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+            />
 
-        <label class="block mb-2 font-medium">HDL Cholesterol</label>
-        <input type="number" id="hdl" class="w-full p-2 border rounded" />
-      </div>
+            <button
+              id="clearValue"
+              class="px-3 py-2 bg-red-50 text-red-600 border border-red-200 rounded-lg"
+              type="button"
+            >
+              Clear
+            </button>
+          </div>
+        </div>
 
-      <!-- Unit -->
-      <label class="block mb-2 font-medium">From Unit</label>
-      <select id="unit" class="w-full border p-2 rounded mb-4"></select>
+        <!-- CHOLESTEROL -->
+        <div id="cholesterolInputs" class="hidden space-y-2">
+          <div>
+            <label class="text-sm font-medium text-gray-700">Total Cholesterol</label>
+            <input
+              type="number"
+              id="totalChol"
+              class="w-full mt-1 p-3 border border-gray-300 rounded-lg"
+            />
+          </div>
 
-      <!-- Result -->
-      <div id="result" class="mt-4 text-center text-lg font-semibold"></div>
+          <div>
+            <label class="text-sm font-medium text-gray-700">HDL Cholesterol</label>
+            <input
+              type="number"
+              id="hdl"
+              class="w-full mt-1 p-3 border border-gray-300 rounded-lg"
+            />
+          </div>
+        </div>
+
+        <!-- UNIT -->
+        <div>
+          <label class="text-sm font-medium text-gray-700">From Unit</label>
+          <select
+            id="unit"
+            class="w-full mt-1 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
+          ></select>
+        </div>
+
+        <!-- RESULT PANEL (clinical output style) -->
+        <div id="result" class="mt-6 p-4 rounded-lg bg-gray-50 border">
+          <p class="text-gray-500 text-sm">Enter a value to begin</p>
+        </div>
+
+      </main>
     </div>
 
     <script type="module" src="js/script.js"></script>
